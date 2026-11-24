@@ -1,0 +1,22 @@
+./target/release/orbit-bench --mode aos --stars 5120 --steps 280
+profile=release mode=aos sizeof_star=64B stars=5120 steps=280
+elapsed=7.8416s throughput=936.04Mpairs/s
+energy_init=-27627.401857 energy_final=-27628.861529 drift=0.005283%
+        7.96 real         7.79 user         0.04 sys
+             2424832  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 326  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                1235  involuntary context switches
+        220553804142  instructions retired
+         33679586806  cycles elapsed
+             1786288  peak memory footprint

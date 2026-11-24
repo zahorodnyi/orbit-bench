@@ -1,0 +1,22 @@
+./target/release/orbit-bench --mode soa --stars 5120 --steps 280
+profile=release mode=soa sizeof_star=64B stars=5120 steps=280
+elapsed=2.2976s throughput=3194.69Mpairs/s
+energy_init=-27627.401857 energy_final=-27628.863387 drift=0.005290%
+        2.29 real         2.28 user         0.01 sys
+             2621440  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 339  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 300  involuntary context switches
+         42580930175  instructions retired
+          9891692576  cycles elapsed
+             1982896  peak memory footprint

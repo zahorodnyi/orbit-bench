@@ -1,0 +1,28 @@
+/tmp/orbit-bench/target/debug/orbit-bench --mode aos --stars 5120 --steps 280
+profile=debug mode=aos sizeof_star=64B stars=5120 steps=280
+elapsed=85.2331s throughput=86.12Mpairs/s
+energy_init=-27627.401856 energy_final=-27628.862857 drift=0.005288%
+
+	Command being timed: "/tmp/orbit-bench/target/debug/orbit-bench --mode aos --stars 5120 --steps 280"
+	User time (seconds): 85.21
+	System time (seconds): 0.00
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:25.23
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2200
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 205
+	Voluntary context switches: 2
+	Involuntary context switches: 554
+	Swaps: 0
+	File system inputs: 24
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

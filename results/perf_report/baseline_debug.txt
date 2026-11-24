@@ -1,0 +1,259 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 83K of event 'cpu-clock'
+# Event count (approx.): 83748748665
+#
+# Overhead       Samples  Symbol                                                                                                    IPC   [IPC Coverage]
+# ........  ............  ........................................................................................................  ....................
+#
+    31.63%         26462  [.] <core::ops::range::Range<usize> as core::iter::range::RangeIteratorImpl>::spec_next                   -      -            
+            |          
+            |--22.31%--<core::ops::range::Range<usize> as core::iter::traits::iterator::Iterator>::next
+            |          |          
+            |          |--19.81%--<core::ops::range::Range<usize> as core::iter::traits::iterator::Iterator>::next
+            |          |          |          
+            |          |          |--19.14%--orbit_bench::aos::compute_forces
+            |          |          |          orbit_bench::aos::run
+            |          |          |          orbit_bench::main
+            |          |          |          <fn() as core::ops::function::FnOnce<()>>::call_once
+            |          |          |          std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |          |          |          std::rt::lang_start::<()>::{closure#0}
+            |          |          |          std::rt::lang_start_internal
+            |          |          |          std::rt::lang_start::<()>
+            |          |          |          main
+            |          |          |          0xffffa4087744
+            |          |          |          __libc_start_main
+            |          |          |          _start
+            |          |          |          
+            |          |           --0.67%--orbit_bench::aos::compute_total_energy
+            |          |                     orbit_bench::aos::run
+            |          |                     orbit_bench::main
+            |          |                     <fn() as core::ops::function::FnOnce<()>>::call_once
+            |          |                     std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |          |                     std::rt::lang_start::<()>::{closure#0}
+            |          |                     std::rt::lang_start_internal
+            |          |                     std::rt::lang_start::<()>
+            |          |                     main
+            |          |                     0xffffa4087744
+            |          |                     __libc_start_main
+            |          |                     _start
+            |          |          
+            |           --2.38%--orbit_bench::aos::compute_forces
+            |                     orbit_bench::aos::run
+            |                     orbit_bench::main
+            |                     <fn() as core::ops::function::FnOnce<()>>::call_once
+            |                     std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |                     std::rt::lang_start::<()>::{closure#0}
+            |                     std::rt::lang_start_internal
+            |                     std::rt::lang_start::<()>
+            |                     main
+            |                     0xffffa4087744
+            |                     __libc_start_main
+            |                     _start
+            |          
+             --9.04%--orbit_bench::aos::compute_forces
+                       orbit_bench::aos::run
+                       orbit_bench::main
+                       <fn() as core::ops::function::FnOnce<()>>::call_once
+                       std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+                       std::rt::lang_start::<()>::{closure#0}
+                       std::rt::lang_start_internal
+                       std::rt::lang_start::<()>
+                       main
+                       0xffffa4087744
+                       __libc_start_main
+                       _start
+
+    20.33%         17010  [.] orbit_bench::aos::pair_gravity                                                                        -      -            
+            |          
+            |--13.51%--orbit_bench::aos::compute_forces
+            |          |          
+            |           --13.25%--orbit_bench::aos::compute_forces
+            |                     orbit_bench::aos::run
+            |                     orbit_bench::main
+            |                     <fn() as core::ops::function::FnOnce<()>>::call_once
+            |                     std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |                     std::rt::lang_start::<()>::{closure#0}
+            |                     std::rt::lang_start_internal
+            |                     std::rt::lang_start::<()>
+            |                     main
+            |                     0xffffa4087744
+            |                     __libc_start_main
+            |                     _start
+            |          
+            |--4.58%--orbit_bench::aos::run
+            |          orbit_bench::main
+            |          <fn() as core::ops::function::FnOnce<()>>::call_once
+            |          std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |          std::rt::lang_start::<()>::{closure#0}
+            |          std::rt::lang_start_internal
+            |          std::rt::lang_start::<()>
+            |          main
+            |          0xffffa4087744
+            |          __libc_start_main
+            |          _start
+            |          
+             --2.25%--orbit_bench::aos::pair_gravity
+                       orbit_bench::aos::compute_forces
+                       orbit_bench::aos::run
+                       orbit_bench::main
+                       <fn() as core::ops::function::FnOnce<()>>::call_once
+                       std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+                       std::rt::lang_start::<()>::{closure#0}
+                       std::rt::lang_start_internal
+                       std::rt::lang_start::<()>
+                       main
+                       0xffffa4087744
+                       __libc_start_main
+                       _start
+
+    11.91%          9968  [.] orbit_bench::aos::compute_forces                                                                      -      -            
+            |
+            ---orbit_bench::aos::compute_forces
+               orbit_bench::aos::run
+               orbit_bench::main
+               <fn() as core::ops::function::FnOnce<()>>::call_once
+               std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+               std::rt::lang_start::<()>::{closure#0}
+               std::rt::lang_start_internal
+               std::rt::lang_start::<()>
+               main
+               0xffffa4087744
+               __libc_start_main
+               _start
+
+    11.06%          9254  [.] <usize>::unchecked_add::precondition_check                                                            -      -            
+            |          
+             --10.78%--<usize as core::iter::range::Step>::forward_unchecked
+                       |          
+                        --10.50%--<usize as core::iter::range::Step>::forward_unchecked
+                                  <core::ops::range::Range<usize> as core::iter::range::RangeIteratorImpl>::spec_next
+                                  <core::ops::range::Range<usize> as core::iter::traits::iterator::Iterator>::next
+                                  |          
+                                   --10.22%--orbit_bench::aos::compute_forces
+                                             orbit_bench::aos::run
+                                             orbit_bench::main
+                                             <fn() as core::ops::function::FnOnce<()>>::call_once
+                                             std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+                                             std::rt::lang_start::<()>::{closure#0}
+                                             std::rt::lang_start_internal
+                                             std::rt::lang_start::<()>
+                                             main
+                                             0xffffa4087744
+                                             __libc_start_main
+                                             _start
+
+    10.60%          8872  [.] <usize as core::iter::range::Step>::forward_unchecked                                                 -      -            
+            |          
+            |--6.08%--<core::ops::range::Range<usize> as core::iter::range::RangeIteratorImpl>::spec_next
+            |          |          
+            |           --5.63%--<core::ops::range::Range<usize> as core::iter::range::RangeIteratorImpl>::spec_next
+            |                     <core::ops::range::Range<usize> as core::iter::traits::iterator::Iterator>::next
+            |                     |          
+            |                      --5.51%--orbit_bench::aos::compute_forces
+            |                                orbit_bench::aos::run
+            |                                orbit_bench::main
+            |                                <fn() as core::ops::function::FnOnce<()>>::call_once
+            |                                std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |                                std::rt::lang_start::<()>::{closure#0}
+            |                                std::rt::lang_start_internal
+            |                                std::rt::lang_start::<()>
+            |                                main
+            |                                0xffffa4087744
+            |                                __libc_start_main
+            |                                _start
+            |          
+             --4.51%--<core::ops::range::Range<usize> as core::iter::traits::iterator::Iterator>::next
+                       |          
+                        --4.47%--orbit_bench::aos::compute_forces
+                                  orbit_bench::aos::run
+                                  orbit_bench::main
+                                  <fn() as core::ops::function::FnOnce<()>>::call_once
+                                  std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+                                  std::rt::lang_start::<()>::{closure#0}
+                                  std::rt::lang_start_internal
+                                  std::rt::lang_start::<()>
+                                  main
+                                  0xffffa4087744
+                                  __libc_start_main
+                                  _start
+
+     7.86%          6577  [.] <f32>::sqrt                                                                                           -      -            
+            |          
+             --7.69%--orbit_bench::aos::compute_forces
+                       orbit_bench::aos::run
+                       orbit_bench::main
+                       <fn() as core::ops::function::FnOnce<()>>::call_once
+                       std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+                       std::rt::lang_start::<()>::{closure#0}
+                       std::rt::lang_start_internal
+                       std::rt::lang_start::<()>
+                       main
+                       0xffffa4087744
+                       __libc_start_main
+                       _start
+
+     4.77%          3994  [.] <core::ops::range::Range<usize> as core::iter::traits::iterator::Iterator>::next                      -      -            
+            |          
+            |--2.67%--orbit_bench::aos::compute_forces
+            |          |          
+            |          |--1.39%--orbit_bench::aos::compute_forces
+            |          |          orbit_bench::aos::run
+            |          |          orbit_bench::main
+            |          |          <fn() as core::ops::function::FnOnce<()>>::call_once
+            |          |          std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |          |          std::rt::lang_start::<()>::{closure#0}
+            |          |          std::rt::lang_start_internal
+            |          |          std::rt::lang_start::<()>
+            |          |          main
+            |          |          0xffffa4087744
+            |          |          __libc_start_main
+            |          |          _start
+            |          |          
+            |           --1.28%--orbit_bench::aos::run
+            |                     orbit_bench::main
+            |                     <fn() as core::ops::function::FnOnce<()>>::call_once
+            |                     std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+            |                     std::rt::lang_start::<()>::{closure#0}
+            |                     std::rt::lang_start_internal
+            |                     std::rt::lang_start::<()>
+            |                     main
+            |                     0xffffa4087744
+            |                     __libc_start_main
+            |                     _start
+            |          
+             --2.09%--orbit_bench::aos::run
+                       orbit_bench::main
+                       <fn() as core::ops::function::FnOnce<()>>::call_once
+                       std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+                       std::rt::lang_start::<()>::{closure#0}
+                       std::rt::lang_start_internal
+                       std::rt::lang_start::<()>
+                       main
+                       0xffffa4087744
+                       __libc_start_main
+                       _start
+
+     1.51%          1261  [.] orbit_bench::aos::compute_total_energy                                                                -      -            
+            |
+            ---orbit_bench::aos::compute_total_energy
+               orbit_bench::aos::run
+               orbit_bench::main
+               <fn() as core::ops::function::FnOnce<()>>::call_once
+               std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+               std::rt::lang_start::<()>::{closure#0}
+               std::rt::lang_start_internal
+               std::rt::lang_start::<()>
+               main
+               0xffffa4087744
+               __libc_start_main
+               _start
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

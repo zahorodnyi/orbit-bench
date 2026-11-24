@@ -1,0 +1,42 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 2379379377
+#
+# Overhead       Samples  Symbol                                      IPC   [IPC Coverage]
+# ........  ............  ..........................................  ....................
+#
+    83.21%          1978  [.] orbit_bench::soa::compute_forces        -      -            
+            |
+            ---orbit_bench::soa::run
+               orbit_bench::soa::run
+               orbit_bench::main
+               std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+               std::rt::lang_start::<()>::{closure#0}
+               std::rt::lang_start_internal
+               main
+               0xffff94e47744
+               0xffff94e47818
+               _start
+
+    16.79%           399  [.] orbit_bench::soa::compute_total_energy  -      -            
+            |
+            ---orbit_bench::soa::run
+               orbit_bench::soa::run
+               orbit_bench::main
+               std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+               std::rt::lang_start::<()>::{closure#0}
+               std::rt::lang_start_internal
+               main
+               0xffff94e47744
+               0xffff94e47818
+               _start
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

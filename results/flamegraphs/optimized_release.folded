@@ -1,0 +1,2 @@
+orbit-bench;_start;[unknown] ;main;std::rt::lang_start_internal;std::rt::lang_start::<;std::sys::backtrace::__rust_begin_short_backtrace::<fn;orbit_bench::main;orbit_bench::soa::run;orbit_bench::soa::compute_forces 1978
+orbit-bench;_start;[unknown] ;main;std::rt::lang_start_internal;std::rt::lang_start::<;std::sys::backtrace::__rust_begin_short_backtrace::<fn;orbit_bench::main;orbit_bench::soa::run;orbit_bench::soa::compute_total_energy 399

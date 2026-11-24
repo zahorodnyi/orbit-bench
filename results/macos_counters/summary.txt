@@ -1,0 +1,4 @@
+variant              time_s   Mpairs/s     instructions         cycles    IPC  eff_GHz   peak_KB
+baseline_debug      80.5177      91.16 1,442,417,287,795 349,051,792,757   4.13     4.34      1744
+baseline_release     7.8416     936.04  220,553,804,142 33,679,586,806   6.55     4.29      1744
+optimized_release    2.2976    3194.69   42,580,930,175  9,891,692,576   4.30     4.31      1936

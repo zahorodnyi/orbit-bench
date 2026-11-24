@@ -1,0 +1,25 @@
+perf stat -d /tmp/orbit-bench/target/release/orbit-bench --mode aos --stars 5120 --steps 280
+# started on Tue Nov 24 23:19:43 2026
+
+
+ Performance counter stats for '/tmp/orbit-bench/target/release/orbit-bench --mode aos --stars 5120 --steps 280':
+
+           7863.29 msec task-clock                       #    1.000 CPUs utilized          
+                42      context-switches                 #    5.341 /sec                   
+                 0      cpu-migrations                   #    0.000 /sec                   
+               180      page-faults                      #   22.891 /sec                   
+   <not supported>      cycles                                                      
+   <not supported>      instructions                                                
+   <not supported>      branches                                                    
+   <not supported>      branch-misses                                               
+   <not supported>      L1-dcache-loads                                             
+   <not supported>      L1-dcache-load-misses                                       
+   <not supported>      LLC-loads                                                   
+   <not supported>      LLC-load-misses                                             
+
+       7.863853836 seconds time elapsed
+
+       7.862324000 seconds user
+       0.000999000 seconds sys
+
+
