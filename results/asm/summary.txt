@@ -1,0 +1,7 @@
+file                          lines  vector_ops key_simd_instructions
+arm64_O0_aos.s                  173           0 (scalar only)
+arm64_O3_aos.s                   59           0 (scalar only)
+arm64_O3_soa_neon.s             225          34 dup.4s, fdiv.4s, fmla.4s, fmov.4s, fmul.4s, fsqrt.4s, fsub.4s, ld1r.4s
+x86_64_O3_aos_sse2.s             65          14 addps, movaps, movlps, mulps, shufps, subps, xorps
+x86_64_O3_soa_sse2.s            245         103 addps, divps, movaps, movups, mulps, shufps, sqrtps, subps, unpcklps, xorps
+x86_64_O3_soa_avx2_fma.s        283          85 vbroadcastss, vdivps, vfmadd213ps, vfmadd231ps, vmovaps, vmovups, vmulps, vsqrtps, vsubps, vxorps

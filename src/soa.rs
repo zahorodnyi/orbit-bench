@@ -3,6 +3,15 @@ use crate::{Config, SimOutput, DT, G, SOFTENING_SQ};
 
 const LANES: usize = 8;
 
+#[inline(always)]
+fn fma(a: f32, b: f32, c: f32) -> f32 {
+    if cfg!(any(target_arch = "aarch64", target_feature = "fma")) {
+        a.mul_add(b, c)
+    } else {
+        a * b + c
+    }
+}
+
 pub struct GalaxySoa {
     pub x: Vec<f32>,
     pub y: Vec<f32>,
@@ -57,12 +66,12 @@ pub fn compute_forces(soa: &mut GalaxySoa) {
                 let dx = x[j] - xi[k];
                 let dy = y[j] - yi[k];
                 let dz = z[j] - zi[k];
-                let dist_sq = dz.mul_add(dz, dy.mul_add(dy, dx.mul_add(dx, SOFTENING_SQ)));
+                let dist_sq = fma(dz, dz, fma(dy, dy, fma(dx, dx, SOFTENING_SQ)));
                 let inv_dist = 1.0 / dist_sq.sqrt();
                 let s = gmj * (inv_dist * inv_dist * inv_dist);
-                ax_acc[k] = dx.mul_add(s, ax_acc[k]);
-                ay_acc[k] = dy.mul_add(s, ay_acc[k]);
-                az_acc[k] = dz.mul_add(s, az_acc[k]);
+                ax_acc[k] = fma(dx, s, ax_acc[k]);
+                ay_acc[k] = fma(dy, s, ay_acc[k]);
+                az_acc[k] = fma(dz, s, az_acc[k]);
             }
         }
 
@@ -77,12 +86,12 @@ pub fn compute_forces(soa: &mut GalaxySoa) {
             let dx = x[j] - x[i];
             let dy = y[j] - y[i];
             let dz = z[j] - z[i];
-            let dist_sq = dz.mul_add(dz, dy.mul_add(dy, dx.mul_add(dx, SOFTENING_SQ)));
+            let dist_sq = fma(dz, dz, fma(dy, dy, fma(dx, dx, SOFTENING_SQ)));
             let inv_dist = 1.0 / dist_sq.sqrt();
             let s = (G * mass[j]) * (inv_dist * inv_dist * inv_dist);
-            ax = dx.mul_add(s, ax);
-            ay = dy.mul_add(s, ay);
-            az = dz.mul_add(s, az);
+            ax = fma(dx, s, ax);
+            ay = fma(dy, s, ay);
+            az = fma(dz, s, az);
         }
         ax_out[i] = ax;
         ay_out[i] = ay;
