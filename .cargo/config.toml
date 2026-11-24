@@ -1,0 +1,4 @@
+# Keep frame pointers enabled in both dev and release builds so `perf record -g`
+# and Brendan Gregg's FlameGraph produce clean, complete call stacks on ARM64 and x86-64.
+[build]
+rustflags = ["-C", "force-frame-pointers=yes"]
