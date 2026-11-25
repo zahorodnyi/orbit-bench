@@ -1,24 +1,15 @@
-# Rust build artifacts
 /target/
 **/*.rs.bk
-
-# Profiling raw binary traces (keep text reports, folded stacks, and SVGs in results/)
 perf.data
 perf.data.old
 *.trace/
 *.profraw
 *.profdata
-
-# Python virtual environment & caches
 .venv/
 __pycache__/
 *.pyc
-
-# macOS & editor artifacts
 .DS_Store
 .vscode/
 .idea/
 *.swp
-
-# Live FlameGraph demo output
 demo_out/

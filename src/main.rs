@@ -5,16 +5,16 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufWriter, Write};
 use std::process;
-use std::str::FromStr;
 use std::time::Instant;
 
 pub const G: f32 = 1.0;
 pub const SOFTENING_SQ: f32 = 0.05;
 pub const DT: f32 = 0.005;
+pub const ENERGY_EVERY: usize = 10;
 pub const SEED: u64 = 0x5EED_CAFE_1337_BEEF;
 
-const USAGE: &str = "Usage: orbit-bench [--mode aos|soa] [--stars N] [--steps S] \
-[--energy-every K] [--quick] [--render PATH.ppm]";
+const USAGE: &str =
+    "Usage: orbit-bench [--mode aos|soa] [--stars N] [--steps S] [--render PATH.ppm]";
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Mode {
@@ -26,7 +26,6 @@ pub struct Config {
     pub mode: Mode,
     pub stars: usize,
     pub steps: usize,
-    pub energy_every: usize,
     pub render_path: Option<String>,
 }
 
@@ -36,7 +35,6 @@ impl Default for Config {
             mode: Mode::Aos,
             stars: 5120,
             steps: 280,
-            energy_every: 10,
             render_path: None,
         }
     }
@@ -88,59 +86,44 @@ fn write_ppm(path: &str, positions: &[(f32, f32, f32)], size: usize) -> io::Resu
     out.write_all(&bytes)
 }
 
-fn parse_value<T: FromStr>(args: &[String], i: usize) -> Result<T, String> {
-    let name = &args[i];
-    args.get(i + 1)
-        .and_then(|v| v.parse().ok())
-        .ok_or_else(|| format!("missing or invalid value for {name}"))
-}
-
 fn parse_args() -> Result<Config, String> {
-    let args: Vec<String> = env::args().skip(1).collect();
+    let mut args = env::args().skip(1);
     let mut cfg = Config::default();
-    let mut i = 0;
 
-    while i < args.len() {
-        match args[i].as_str() {
+    while let Some(arg) = args.next() {
+        match arg.as_str() {
             "--mode" => {
-                cfg.mode = match args.get(i + 1).map(String::as_str) {
+                cfg.mode = match args.next().as_deref() {
                     Some("aos") => Mode::Aos,
                     Some("soa") => Mode::Soa,
                     _ => return Err("--mode expects aos or soa".into()),
                 };
-                i += 1;
             }
             "--stars" => {
-                cfg.stars = parse_value(&args, i)?;
-                i += 1;
+                cfg.stars = args
+                    .next()
+                    .and_then(|v| v.parse().ok())
+                    .ok_or("missing or invalid --stars")?;
             }
             "--steps" => {
-                cfg.steps = parse_value(&args, i)?;
-                i += 1;
-            }
-            "--energy-every" => {
-                cfg.energy_every = parse_value(&args, i)?;
-                i += 1;
+                cfg.steps = args
+                    .next()
+                    .and_then(|v| v.parse().ok())
+                    .ok_or("missing or invalid --steps")?;
             }
             "--render" => {
-                cfg.render_path = Some(parse_value(&args, i)?);
-                i += 1;
-            }
-            "--quick" => {
-                cfg.stars = 2048;
-                cfg.steps = 80;
+                cfg.render_path = Some(args.next().ok_or("missing --render")?);
             }
             "-h" | "--help" => {
                 println!("{USAGE}");
                 process::exit(0);
             }
-            arg => return Err(format!("unknown argument: {arg}")),
+            other => return Err(format!("unknown argument: {other}")),
         }
-        i += 1;
     }
 
-    if cfg.stars < 2 || cfg.steps < 1 || cfg.energy_every < 1 {
-        return Err("--stars must be >= 2, --steps and --energy-every must be >= 1".into());
+    if cfg.stars < 2 || cfg.steps < 1 {
+        return Err("--stars must be >= 2 and --steps must be >= 1".into());
     }
     Ok(cfg)
 }

@@ -2,10 +2,8 @@
 name = "orbit-bench"
 version = "0.1.0"
 edition = "2021"
-description = "N-Body galaxy gravity simulation benchmark for CPU profiling, SIMD optimization, and energy analysis"
 
 [dependencies]
-# Pure std: zero external dependencies to measure clean computational code.
 
 [profile.dev]
 opt-level = 0

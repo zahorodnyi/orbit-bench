@@ -1,5 +1,5 @@
 use crate::aos::{init_galaxy, Star};
-use crate::{Config, SimOutput, DT, G, SOFTENING_SQ};
+use crate::{Config, SimOutput, DT, ENERGY_EVERY, G, SOFTENING_SQ};
 
 const LANES: usize = 8;
 
@@ -145,7 +145,7 @@ pub fn run(cfg: &Config) -> SimOutput {
     for step in 1..=cfg.steps {
         compute_forces(&mut soa);
         integrate_motion(&mut soa, DT);
-        if step % cfg.energy_every == 0 || step == cfg.steps {
+        if step % ENERGY_EVERY == 0 || step == cfg.steps {
             final_energy = compute_total_energy(&soa);
         }
     }

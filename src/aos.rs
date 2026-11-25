@@ -1,4 +1,4 @@
-use crate::{Config, SimOutput, DT, G, SEED, SOFTENING_SQ};
+use crate::{Config, SimOutput, DT, ENERGY_EVERY, G, SEED, SOFTENING_SQ};
 
 #[repr(C)]
 #[derive(Clone, Copy, Default)]
@@ -139,7 +139,7 @@ pub fn run(cfg: &Config) -> SimOutput {
     for step in 1..=cfg.steps {
         compute_forces(&mut stars);
         integrate_motion(&mut stars, DT);
-        if step % cfg.energy_every == 0 || step == cfg.steps {
+        if step % ENERGY_EVERY == 0 || step == cfg.steps {
             final_energy = compute_total_energy(&stars);
         }
     }

@@ -452,16 +452,16 @@
 <text  x="13.00" y="215.5" >orbit-bench</text>
 </g>
 <g >
-<title>orbit_bench::soa::run (2,377 samples, 100.00%; 0.00%)</title><rect x="10.0" y="77" width="1180.0" height="15.0" fill="rgb(255,255,255)" rx="2" ry="2" />
-<text  x="13.00" y="87.5" >orbit_bench::soa::run</text>
+<title>orbit_bench::run (2,377 samples, 100.00%; 0.00%)</title><rect x="10.0" y="77" width="1180.0" height="15.0" fill="rgb(255,255,255)" rx="2" ry="2" />
+<text  x="13.00" y="87.5" >orbit_bench::run</text>
 </g>
 <g >
-<title>orbit_bench::soa::compute_forces (1,978 samples, 83.21%; +83.21%)</title><rect x="10.0" y="61" width="981.9" height="15.0" fill="rgb(255,27,27)" rx="2" ry="2" />
-<text  x="13.00" y="71.5" >orbit_bench::soa::compute_forces</text>
+<title>orbit_bench::compute_forces (1,978 samples, 83.21%; -12.58%)</title><rect x="10.0" y="61" width="981.9" height="15.0" fill="rgb(120,155,255)" rx="2" ry="2" />
+<text  x="13.00" y="71.5" >orbit_bench::compute_forces</text>
 </g>
 <g >
-<title>orbit_bench::soa::compute_total_energy (399 samples, 16.79%; +16.79%)</title><rect x="991.9" y="61" width="198.1" height="15.0" fill="rgb(255,173,173)" rx="2" ry="2" />
-<text  x="994.93" y="71.5" >orbit_bench::soa::compute..</text>
+<title>orbit_bench::compute_total_energy (399 samples, 16.79%; +12.58%)</title><rect x="991.9" y="61" width="198.1" height="15.0" fill="rgb(255,130,130)" rx="2" ry="2" />
+<text  x="994.93" y="71.5" >orbit_bench::compute_tot..</text>
 </g>
 <g >
 <title>all (2,377 samples, 100%)</title><rect x="10.0" y="221" width="1180.0" height="15.0" fill="rgb(255,255,255)" rx="2" ry="2" />

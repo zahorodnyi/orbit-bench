@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="920" height="620" font-family="system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="920" height="620" font-family="system-ui, sans-serif">
 <rect width="920" height="620" fill="#ffffff"/>
 <text x="460.0" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">System Power Over Time During orbit-bench on Apple M5 (powermetrics)</text>
 <rect x="70" y="44" width="14" height="10" rx="2" fill="#dc2626"/>
@@ -8,33 +8,33 @@
 <rect x="640" y="44" width="14" height="10" rx="2" fill="#16a34a"/>
 <text x="660" y="53" font-size="12" fill="#1e293b">optimized_release (SoA + SIMD, -O3)</text>
 <text x="70" y="74" font-size="12" font-weight="700" fill="#1e293b">Full Timeline (All 3 Variants — Shaded Area = Total Energy in Joules)</text>
-<line x1="70" y1="292.0" x2="890" y2="292.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="292.0" x2="890" y2="292.0" stroke="#e2e8f0"/>
 <text x="62" y="296.0" text-anchor="end" font-size="11" fill="#475569">0.0 W</text>
-<line x1="70" y1="239.5" x2="890" y2="239.5" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="239.5" x2="890" y2="239.5" stroke="#e2e8f0"/>
 <text x="62" y="243.5" text-anchor="end" font-size="11" fill="#475569">6.4 W</text>
-<line x1="70" y1="187.0" x2="890" y2="187.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="187.0" x2="890" y2="187.0" stroke="#e2e8f0"/>
 <text x="62" y="191.0" text-anchor="end" font-size="11" fill="#475569">12.8 W</text>
-<line x1="70" y1="134.5" x2="890" y2="134.5" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="134.5" x2="890" y2="134.5" stroke="#e2e8f0"/>
 <text x="62" y="138.5" text-anchor="end" font-size="11" fill="#475569">19.1 W</text>
-<line x1="70" y1="82.0" x2="890" y2="82.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="82.0" x2="890" y2="82.0" stroke="#e2e8f0"/>
 <text x="62" y="86.0" text-anchor="end" font-size="11" fill="#475569">25.5 W</text>
-<line x1="70.0" y1="82" x2="70.0" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="70.0" y1="82" x2="70.0" y2="292" stroke="#f1f5f9"/>
 <text x="70.0" y="308" text-anchor="middle" font-size="11" fill="#475569">0.0 s</text>
-<line x1="172.5" y1="82" x2="172.5" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="172.5" y1="82" x2="172.5" y2="292" stroke="#f1f5f9"/>
 <text x="172.5" y="308" text-anchor="middle" font-size="11" fill="#475569">10.5 s</text>
-<line x1="275.0" y1="82" x2="275.0" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="275.0" y1="82" x2="275.0" y2="292" stroke="#f1f5f9"/>
 <text x="275.0" y="308" text-anchor="middle" font-size="11" fill="#475569">21.1 s</text>
-<line x1="377.5" y1="82" x2="377.5" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="377.5" y1="82" x2="377.5" y2="292" stroke="#f1f5f9"/>
 <text x="377.5" y="308" text-anchor="middle" font-size="11" fill="#475569">31.6 s</text>
-<line x1="480.0" y1="82" x2="480.0" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="480.0" y1="82" x2="480.0" y2="292" stroke="#f1f5f9"/>
 <text x="480.0" y="308" text-anchor="middle" font-size="11" fill="#475569">42.2 s</text>
-<line x1="582.5" y1="82" x2="582.5" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="582.5" y1="82" x2="582.5" y2="292" stroke="#f1f5f9"/>
 <text x="582.5" y="308" text-anchor="middle" font-size="11" fill="#475569">52.7 s</text>
-<line x1="685.0" y1="82" x2="685.0" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="685.0" y1="82" x2="685.0" y2="292" stroke="#f1f5f9"/>
 <text x="685.0" y="308" text-anchor="middle" font-size="11" fill="#475569">63.2 s</text>
-<line x1="787.5" y1="82" x2="787.5" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="787.5" y1="82" x2="787.5" y2="292" stroke="#f1f5f9"/>
 <text x="787.5" y="308" text-anchor="middle" font-size="11" fill="#475569">73.8 s</text>
-<line x1="890.0" y1="82" x2="890.0" y2="292" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="890.0" y1="82" x2="890.0" y2="292" stroke="#f1f5f9"/>
 <text x="890.0" y="308" text-anchor="middle" font-size="11" fill="#475569">84.3 s</text>
 <line x1="70" y1="279.9" x2="890" y2="279.9" stroke="#64748b" stroke-dasharray="5,4" stroke-width="1.4"/>
 <text x="884" y="274.9" text-anchor="end" font-size="11" fill="#475569">P_idle = 1.47 W</text>
@@ -44,35 +44,35 @@
 <polyline points="71.1,272.0 72.2,222.0 73.3,221.0 74.4,220.2 75.4,220.8 76.5,220.7 77.6,221.3 78.7,221.6 79.8,221.0 80.9,221.2 82.0,221.4 83.1,221.3 84.1,220.9 85.2,221.3 86.3,221.3 87.4,221.1 88.5,216.4 89.6,221.9 90.7,221.0 91.8,221.1 92.8,220.5 93.9,220.3 95.0,218.6 96.1,221.3 97.2,221.5 98.3,220.9 99.4,221.4 100.5,221.3 101.5,221.0 102.6,221.3 103.7,221.2 104.8,220.9 105.9,221.4 107.0,221.2 108.1,216.7 109.2,221.5 110.2,221.0 111.3,212.0 112.4,220.3 113.5,220.9 114.6,221.3 115.7,221.0 116.8,221.0 117.9,221.2 118.9,221.1 120.0,221.0 121.1,198.7 122.2,175.5 123.3,177.8 124.4,203.1 125.5,221.2 126.6,220.1 127.7,216.8 128.8,221.3 129.9,220.9 130.9,221.6 132.0,220.7 133.1,221.3 134.2,220.8 135.3,221.4 136.4,221.3 137.5,220.7 138.6,221.6 139.6,220.9 140.7,221.0 141.8,221.2 142.9,220.2 144.0,221.0 145.1,220.8 146.2,221.2" fill="none" stroke="#d97706" stroke-width="2.2"/>
 <polygon points="71.1,292.0 71.1,283.1 72.2,237.4 73.3,227.0 74.4,231.9 75.5,232.2 76.6,231.3 77.6,231.1 78.7,230.9 79.8,231.4 80.9,231.6 82.0,231.8 83.1,231.3 84.2,231.4 85.2,231.8 86.3,231.1 87.4,231.3 88.5,231.8 89.6,229.3 90.7,230.5 91.8,200.4 92.9,225.3 92.9,292.0" fill="#16a34a" fill-opacity="0.12"/>
 <polyline points="71.1,283.1 72.2,237.4 73.3,227.0 74.4,231.9 75.5,232.2 76.6,231.3 77.6,231.1 78.7,230.9 79.8,231.4 80.9,231.6 82.0,231.8 83.1,231.3 84.2,231.4 85.2,231.8 86.3,231.1 87.4,231.3 88.5,231.8 89.6,229.3 90.7,230.5 91.8,200.4 92.9,225.3" fill="none" stroke="#16a34a" stroke-width="2.2"/>
-<rect x="70" y="82" width="820" height="210" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<rect x="70" y="82" width="820" height="210" fill="none" stroke="#94a3b8"/>
 <text x="70" y="337" font-size="12" font-weight="700" fill="#1e293b">Zoomed View: Release Variants (AoS -O3 vs SoA + SIMD -O3)</text>
-<line x1="70" y1="560.0" x2="890" y2="560.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="560.0" x2="890" y2="560.0" stroke="#e2e8f0"/>
 <text x="62" y="564.0" text-anchor="end" font-size="11" fill="#475569">0.0 W</text>
-<line x1="70" y1="506.2" x2="890" y2="506.2" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="506.2" x2="890" y2="506.2" stroke="#e2e8f0"/>
 <text x="62" y="510.2" text-anchor="end" font-size="11" fill="#475569">6.4 W</text>
-<line x1="70" y1="452.5" x2="890" y2="452.5" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="452.5" x2="890" y2="452.5" stroke="#e2e8f0"/>
 <text x="62" y="456.5" text-anchor="end" font-size="11" fill="#475569">12.8 W</text>
-<line x1="70" y1="398.8" x2="890" y2="398.8" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="398.8" x2="890" y2="398.8" stroke="#e2e8f0"/>
 <text x="62" y="402.8" text-anchor="end" font-size="11" fill="#475569">19.1 W</text>
-<line x1="70" y1="345.0" x2="890" y2="345.0" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="70" y1="345.0" x2="890" y2="345.0" stroke="#e2e8f0"/>
 <text x="62" y="349.0" text-anchor="end" font-size="11" fill="#475569">25.5 W</text>
-<line x1="70.0" y1="345" x2="70.0" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="70.0" y1="345" x2="70.0" y2="560" stroke="#f1f5f9"/>
 <text x="70.0" y="576" text-anchor="middle" font-size="11" fill="#475569">0.0 s</text>
-<line x1="172.5" y1="345" x2="172.5" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="172.5" y1="345" x2="172.5" y2="560" stroke="#f1f5f9"/>
 <text x="172.5" y="576" text-anchor="middle" font-size="11" fill="#475569">1.1 s</text>
-<line x1="275.0" y1="345" x2="275.0" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="275.0" y1="345" x2="275.0" y2="560" stroke="#f1f5f9"/>
 <text x="275.0" y="576" text-anchor="middle" font-size="11" fill="#475569">2.1 s</text>
-<line x1="377.5" y1="345" x2="377.5" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="377.5" y1="345" x2="377.5" y2="560" stroke="#f1f5f9"/>
 <text x="377.5" y="576" text-anchor="middle" font-size="11" fill="#475569">3.2 s</text>
-<line x1="480.0" y1="345" x2="480.0" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="480.0" y1="345" x2="480.0" y2="560" stroke="#f1f5f9"/>
 <text x="480.0" y="576" text-anchor="middle" font-size="11" fill="#475569">4.2 s</text>
-<line x1="582.5" y1="345" x2="582.5" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="582.5" y1="345" x2="582.5" y2="560" stroke="#f1f5f9"/>
 <text x="582.5" y="576" text-anchor="middle" font-size="11" fill="#475569">5.3 s</text>
-<line x1="685.0" y1="345" x2="685.0" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="685.0" y1="345" x2="685.0" y2="560" stroke="#f1f5f9"/>
 <text x="685.0" y="576" text-anchor="middle" font-size="11" fill="#475569">6.3 s</text>
-<line x1="787.5" y1="345" x2="787.5" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="787.5" y1="345" x2="787.5" y2="560" stroke="#f1f5f9"/>
 <text x="787.5" y="576" text-anchor="middle" font-size="11" fill="#475569">7.4 s</text>
-<line x1="890.0" y1="345" x2="890.0" y2="560" stroke="#f1f5f9" stroke-width="1"/>
+<line x1="890.0" y1="345" x2="890.0" y2="560" stroke="#f1f5f9"/>
 <text x="890.0" y="576" text-anchor="middle" font-size="11" fill="#475569">8.5 s</text>
 <line x1="70" y1="547.6" x2="890" y2="547.6" stroke="#64748b" stroke-dasharray="5,4" stroke-width="1.4"/>
 <text x="884" y="542.6" text-anchor="end" font-size="11" fill="#475569">P_idle = 1.47 W</text>
@@ -80,7 +80,6 @@
 <polyline points="80.9,539.5 91.8,488.3 102.6,487.4 113.4,486.5 124.3,487.1 135.1,487.0 146.0,487.6 156.8,487.9 167.7,487.3 178.5,487.5 189.3,487.8 200.2,487.6 211.0,487.2 221.8,487.6 232.7,487.6 243.5,487.4 254.3,482.6 265.3,488.3 276.1,487.3 286.9,487.4 297.8,486.8 308.6,486.6 319.4,484.8 330.3,487.6 341.1,487.8 352.0,487.3 362.8,487.8 373.6,487.6 384.5,487.3 395.3,487.6 406.1,487.5 417.0,487.2 427.8,487.7 438.7,487.5 449.5,482.9 460.4,487.9 471.2,487.3 482.1,478.1 493.0,486.6 503.8,487.2 514.7,487.6 525.5,487.3 536.4,487.3 547.2,487.5 558.0,487.5 568.9,487.3 579.6,464.5 590.6,440.7 601.5,443.1 612.4,469.0 623.3,487.5 634.2,486.3 645.1,483.0 656.0,487.6 666.8,487.2 677.7,487.9 688.5,487.0 699.4,487.6 710.2,487.1 721.0,487.7 731.8,487.6 742.7,487.0 753.5,487.9 764.3,487.2 775.1,487.3 786.0,487.5 796.8,486.5 807.6,487.3 818.4,487.1 829.3,487.5" fill="none" stroke="#d97706" stroke-width="2.2"/>
 <polygon points="80.8,560.0 80.8,550.9 91.9,504.1 102.8,493.4 113.7,498.4 124.5,498.7 135.4,497.9 146.2,497.6 157.1,497.4 167.9,497.9 178.7,498.2 189.6,498.4 200.4,497.8 211.2,497.9 222.0,498.4 232.8,497.6 243.7,497.9 254.5,498.4 265.3,495.8 276.2,497.1 287.0,466.2 297.9,491.7 297.9,560.0" fill="#16a34a" fill-opacity="0.12"/>
 <polyline points="80.8,550.9 91.9,504.1 102.8,493.4 113.7,498.4 124.5,498.7 135.4,497.9 146.2,497.6 157.1,497.4 167.9,497.9 178.7,498.2 189.6,498.4 200.4,497.8 211.2,497.9 222.0,498.4 232.8,497.6 243.7,497.9 254.5,498.4 265.3,495.8 276.2,497.1 287.0,466.2 297.9,491.7" fill="none" stroke="#16a34a" stroke-width="2.2"/>
-<rect x="70" y="345" width="820" height="215" fill="none" stroke="#94a3b8" stroke-width="1"/>
+<rect x="70" y="345" width="820" height="215" fill="none" stroke="#94a3b8"/>
 <text x="460.0" y="606" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Execution Time t (seconds)</text>
-<text x="18" y="320" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" transform="rotate(-90 18 320)">System Power P (Watts)</text>
-</svg>
+<text x="18" y="320" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" transform="rotate(-90 18 320)">System Power P (Watts)</text></svg>

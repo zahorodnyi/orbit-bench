@@ -60,7 +60,9 @@ done
 
 echo
 echo "== Differential FlameGraph: baseline_release -> optimized_release =="
-"$FG/difffolded.pl" -n "$RES/flamegraphs/baseline_release.folded" "$RES/flamegraphs/optimized_release.folded" \
+"$FG/difffolded.pl" -n \
+    <(sed 's/::aos::/::/g' "$RES/flamegraphs/baseline_release.folded") \
+    <(sed 's/::soa::/::/g' "$RES/flamegraphs/optimized_release.folded") \
     | "$FG/flamegraph.pl" --title "diff: baseline_release -> optimized_release" \
         --subtitle "red = grew, blue = shrank" > "$RES/flamegraphs/diff_baseline_to_optimized.svg"
 
