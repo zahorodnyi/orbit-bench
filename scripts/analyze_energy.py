@@ -49,8 +49,8 @@ def parse_log(path):
         sys_w = comb_w if comb_w is not None else (pkg_w if pkg_w is not None else cpu_w + gpu_w + ane_w)
 
         orbit_ms = 0.0
-        orbit_energy_impact = 0.0
-        all_tasks_ms = 0.0
+        orbit_ei = 0.0
+        all_tasks_ei = 0.0
         for line in chunk.splitlines():
             s = line.strip()
             if s.startswith("orbit-bench"):
@@ -61,14 +61,14 @@ def parse_log(path):
                     except ValueError:
                         pass
                     try:
-                        orbit_energy_impact += float(parts[-1])
+                        orbit_ei += float(parts[-1])
                     except ValueError:
                         pass
             elif s.startswith("ALL_TASKS"):
                 parts = s.split()
                 if len(parts) >= 3:
                     try:
-                        all_tasks_ms = float(parts[2])
+                        all_tasks_ei = float(parts[-1])
                     except ValueError:
                         pass
 
@@ -78,8 +78,8 @@ def parse_log(path):
             "cpu_w": cpu_w,
             "gpu_w": gpu_w,
             "orbit_ms": orbit_ms,
-            "all_tasks_ms": all_tasks_ms,
-            "energy_impact": orbit_energy_impact,
+            "orbit_ei": orbit_ei,
+            "all_tasks_ei": all_tasks_ei,
         })
     return samples
 
@@ -91,21 +91,56 @@ def filter_active(phase, samples):
     return active if active else samples
 
 
-def write_timeline_svg(out_path, timelines, idle_sys_w):
-    w, h = 920, 440
-    pad_l, pad_r, pad_t, pad_b = 70, 30, 55, 65
-    pw, ph = w - pad_l - pad_r, h - pad_t - pad_b
-
-    max_t = max((pts[-1][0] for pts in timelines.values() if pts), default=1.0)
-    max_w = max((max(p[1] for p in pts) for pts in timelines.values() if pts), default=10.0) * 1.15
-    max_t = max(max_t, 1.0)
-    max_w = max(max_w, 1.0)
-
+def draw_subplot(svg, x0, y0, pw, ph, max_t, max_w, timelines, phases, idle_sys_w, subtitle):
     def sx(t):
-        return pad_l + (t / max_t) * pw
+        return x0 + (min(t, max_t) / max_t) * pw
 
     def sy(val):
-        return pad_t + ph - (val / max_w) * ph
+        return y0 + ph - (val / max_w) * ph
+
+    svg.append(f'<text x="{x0}" y="{y0 - 8}" font-size="12" font-weight="700" fill="#1e293b">{subtitle}</text>')
+
+    for i in range(5):
+        val = max_w * i / 4.0
+        y = sy(val)
+        svg.append(f'<line x1="{x0}" y1="{y:.1f}" x2="{x0 + pw}" y2="{y:.1f}" stroke="#e2e8f0" stroke-width="1"/>')
+        svg.append(f'<text x="{x0 - 8}" y="{y + 4:.1f}" text-anchor="end" font-size="11" fill="#475569">{val:.1f} W</text>')
+
+    steps_t = 8
+    for i in range(steps_t + 1):
+        t = max_t * i / steps_t
+        x = sx(t)
+        svg.append(f'<line x1="{x:.1f}" y1="{y0}" x2="{x:.1f}" y2="{y0 + ph}" stroke="#f1f5f9" stroke-width="1"/>')
+        svg.append(f'<text x="{x:.1f}" y="{y0 + ph + 16}" text-anchor="middle" font-size="11" fill="#475569">{t:.1f} s</text>')
+
+    y_idle = sy(idle_sys_w)
+    svg.append(f'<line x1="{x0}" y1="{y_idle:.1f}" x2="{x0 + pw}" y2="{y_idle:.1f}" stroke="#64748b" stroke-dasharray="5,4" stroke-width="1.4"/>')
+    svg.append(f'<text x="{x0 + pw - 6}" y="{y_idle - 5:.1f}" text-anchor="end" font-size="11" fill="#475569">P_idle = {idle_sys_w:.2f} W</text>')
+
+    for phase in phases:
+        pts = [(t, p) for t, p in timelines.get(phase, []) if t <= max_t * 1.02]
+        if not pts:
+            continue
+        color = COLORS[phase]
+        coords = " ".join(f"{sx(t):.1f},{sy(p):.1f}" for t, p in pts)
+        area = f"{sx(pts[0][0]):.1f},{sy(0):.1f} " + coords + f" {sx(pts[-1][0]):.1f},{sy(0):.1f}"
+        svg.append(f'<polygon points="{area}" fill="{color}" fill-opacity="0.12"/>')
+        svg.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="2.2"/>')
+
+    svg.append(f'<rect x="{x0}" y="{y0}" width="{pw}" height="{ph}" fill="none" stroke="#94a3b8" stroke-width="1"/>')
+
+
+def write_timeline_svg(out_path, timelines, idle_sys_w):
+    w, h = 920, 620
+    pad_l, pad_r = 70, 30
+    pw = w - pad_l - pad_r
+
+    max_all_t = max((pts[-1][0] for pts in timelines.values() if pts), default=10.0) * 1.03
+    rel_t = max(
+        (timelines[p][-1][0] for p in ["baseline_release", "optimized_release"] if timelines.get(p)),
+        default=10.0,
+    ) * 1.08
+    max_w = max((max(p[1] for p in pts) for pts in timelines.values() if pts), default=10.0) * 1.18
 
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" font-family="system-ui, -apple-system, sans-serif">',
@@ -113,43 +148,25 @@ def write_timeline_svg(out_path, timelines, idle_sys_w):
         f'<text x="{w/2}" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">System Power Over Time During orbit-bench on Apple M5 (powermetrics)</text>',
     ]
 
-    for i in range(6):
-        val = max_w * i / 5.0
-        y = sy(val)
-        svg.append(f'<line x1="{pad_l}" y1="{y:.1f}" x2="{w - pad_r}" y2="{y:.1f}" stroke="#e2e8f0" stroke-width="1"/>')
-        svg.append(f'<text x="{pad_l - 8}" y="{y + 4:.1f}" text-anchor="end" font-size="11" fill="#475569">{val:.1f} W</text>')
-
-    steps_t = 8
-    for i in range(steps_t + 1):
-        t = max_t * i / steps_t
-        x = sx(t)
-        svg.append(f'<line x1="{x:.1f}" y1="{pad_t}" x2="{x:.1f}" y2="{pad_t + ph}" stroke="#f1f5f9" stroke-width="1"/>')
-        svg.append(f'<text x="{x:.1f}" y="{pad_t + ph + 18}" text-anchor="middle" font-size="11" fill="#475569">{t:.1f} s</text>')
-
-    y_idle = sy(idle_sys_w)
-    svg.append(f'<line x1="{pad_l}" y1="{y_idle:.1f}" x2="{w - pad_r}" y2="{y_idle:.1f}" stroke="#64748b" stroke-dasharray="5,4" stroke-width="1.5"/>')
-    svg.append(f'<text x="{w - pad_r - 6}" y="{y_idle - 6:.1f}" text-anchor="end" font-size="11" fill="#475569">P_idle = {idle_sys_w:.2f} W</text>')
-
-    for phase in ["baseline_debug", "baseline_release", "optimized_release"]:
-        pts = timelines.get(phase, [])
-        if not pts:
-            continue
-        color = COLORS[phase]
-        coords = " ".join(f"{sx(t):.1f},{sy(p):.1f}" for t, p in pts)
-        area = f"{sx(pts[0][0]):.1f},{sy(0):.1f} " + coords + f" {sx(pts[-1][0]):.1f},{sy(0):.1f}"
-        svg.append(f'<polygon points="{area}" fill="{color}" fill-opacity="0.10"/>')
-        svg.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="2.4"/>')
-
-    svg.append(f'<rect x="{pad_l}" y="{pad_t}" width="{pw}" height="{ph}" fill="none" stroke="#94a3b8" stroke-width="1"/>')
-    svg.append(f'<text x="{w/2}" y="{h - 12}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Execution Time t (seconds)</text>')
-    svg.append(f'<text x="18" y="{pad_t + ph/2}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" transform="rotate(-90 18 {pad_t + ph/2})">Power P (Watts)</text>')
-
-    lx = pad_l + 15
+    lx = pad_l
     for idx, phase in enumerate(["baseline_debug", "baseline_release", "optimized_release"]):
-        ly = pad_t + 18 + idx * 20
-        svg.append(f'<rect x="{lx}" y="{ly - 9}" width="14" height="10" rx="2" fill="{COLORS[phase]}"/>')
-        svg.append(f'<text x="{lx + 20}" y="{ly}" font-size="12" fill="#1e293b">{LABELS[phase]}</text>')
+        ox = lx + idx * 285
+        svg.append(f'<rect x="{ox}" y="44" width="14" height="10" rx="2" fill="{COLORS[phase]}"/>')
+        svg.append(f'<text x="{ox + 20}" y="53" font-size="12" fill="#1e293b">{LABELS[phase]}</text>')
 
+    draw_subplot(
+        svg, pad_l, 82, pw, 210, max_all_t, max_w, timelines,
+        ["baseline_debug", "baseline_release", "optimized_release"],
+        idle_sys_w, "Full Timeline (All 3 Variants — Shaded Area = Total Energy in Joules)"
+    )
+    draw_subplot(
+        svg, pad_l, 345, pw, 215, rel_t, max_w, timelines,
+        ["baseline_release", "optimized_release"],
+        idle_sys_w, "Zoomed View: Release Variants (AoS -O3 vs SoA + SIMD -O3)"
+    )
+
+    svg.append(f'<text x="{w/2}" y="{h - 14}" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Execution Time t (seconds)</text>')
+    svg.append(f'<text x="18" y="320" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" transform="rotate(-90 18 320)">System Power P (Watts)</text>')
     svg.append("</svg>\n")
     out_path.write_text("\n".join(svg))
 
@@ -159,7 +176,7 @@ def write_comparison_svg(out_path, summary):
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" font-family="system-ui, -apple-system, sans-serif">',
         f'<rect width="{w}" height="{h}" fill="#ffffff"/>',
-        f'<text x="{w/2}" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Time, Average Power, and Total Energy Comparison (Race to Idle)</text>',
+        f'<text x="{w/2}" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Time, Average Power, and Total Energy Comparison on Apple M5</text>',
     ]
 
     panels = [
@@ -178,7 +195,7 @@ def write_comparison_svg(out_path, summary):
     gap = 35
     start_x = 45
     top_y = 70
-    chart_h = 260
+    chart_h = 285
 
     for p_idx, (title, key, unit) in enumerate(panels):
         px = start_x + p_idx * (panel_w + gap)
@@ -188,7 +205,7 @@ def write_comparison_svg(out_path, summary):
         svg.append(f'<text x="{px + panel_w/2}" y="{top_y - 14}" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">{title}</text>')
         svg.append(f'<rect x="{px}" y="{top_y}" width="{panel_w}" height="{chart_h}" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>')
 
-        bar_w = 52
+        bar_w = 54
         spacing = (panel_w - len(variants) * bar_w) / (len(variants) + 1)
 
         for b_idx, v in enumerate(variants):
@@ -223,7 +240,6 @@ def main():
     idle_samples = parsed["idle"]
     idle_dt = sum(s["dt"] for s in idle_samples)
     idle_sys_w = sum(s["sys_w"] * s["dt"] for s in idle_samples) / idle_dt
-    idle_cpu_w = sum(s["cpu_w"] * s["dt"] for s in idle_samples) / idle_dt
 
     summary = {}
     timelines = {}
@@ -252,9 +268,9 @@ def main():
                 share = 0.0
             else:
                 delta_w = max(0.0, sys_w - idle_sys_w)
-                denom = max(s["all_tasks_ms"], s["orbit_ms"], 1.0)
-                share = min(1.0, s["orbit_ms"] / denom) if s["orbit_ms"] > 0 else 1.0
-                task_w = max(0.0, cpu_w - idle_cpu_w) * share
+                denom = max(s["all_tasks_ei"], s["orbit_ei"], 1e-6)
+                share = min(1.0, s["orbit_ei"] / denom) if s["orbit_ei"] > 0 else 1.0
+                task_w = cpu_w * share
 
             sys_j += sys_w * dt
             cpu_j += cpu_w * dt
@@ -278,17 +294,17 @@ def main():
             "prog_delta_j": delta_j,
             "prog_task_w": task_j / t_acc,
             "prog_task_j": task_j,
-            "cpu_share_pct": (share_acc / t_acc) * 100.0,
+            "ei_share_pct": (share_acc / t_acc) * 100.0,
         }
 
     with (out_dir / "timeline.csv").open("w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["phase", "sample", "t_s", "sys_W", "cpu_W", "prog_delta_W", "prog_task_W", "orbit_cpu_ms_s", "cpu_share_pct"])
+        w.writerow(["phase", "sample", "t_s", "sys_W", "cpu_W", "prog_delta_W", "prog_task_W", "orbit_cpu_ms_s", "ei_share_pct"])
         w.writerows(timeline_rows)
 
     with (out_dir / "summary.csv").open("w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["phase", "samples", "duration_s", "sys_avg_W", "sys_energy_J", "prog_delta_W", "prog_delta_J", "prog_task_W", "prog_task_J", "cpu_share_pct"])
+        w.writerow(["phase", "samples", "duration_s", "sys_avg_W", "sys_energy_J", "prog_delta_W", "prog_delta_J", "prog_task_W", "prog_task_J", "ei_share_pct"])
         for phase in PHASES:
             if phase not in summary:
                 continue
@@ -298,11 +314,11 @@ def main():
                 f"{m['sys_avg_w']:.3f}", f"{m['sys_energy_j']:.3f}",
                 f"{m['prog_delta_w']:.3f}", f"{m['prog_delta_j']:.3f}",
                 f"{m['prog_task_w']:.3f}", f"{m['prog_task_j']:.3f}",
-                f"{m['cpu_share_pct']:.1f}"
+                f"{m['ei_share_pct']:.1f}"
             ])
 
     lines = [
-        f"{'phase':<18} {'samples':>7} {'time_s':>8} {'sys_W':>8} {'sys_J':>9} {'prog_dW':>8} {'prog_dJ':>9} {'task_W':>8} {'task_J':>9} {'CPU_%':>7}"
+        f"{'phase':<18} {'samples':>7} {'time_s':>8} {'sys_W':>8} {'sys_J':>9} {'prog_dW':>8} {'prog_dJ':>9} {'task_W':>8} {'task_J':>9} {'EI_%':>7}"
     ]
     for phase in PHASES:
         if phase not in summary:
@@ -313,7 +329,7 @@ def main():
             f"{m['sys_avg_w']:>8.3f} {m['sys_energy_j']:>9.2f} "
             f"{m['prog_delta_w']:>8.3f} {m['prog_delta_j']:>9.2f} "
             f"{m['prog_task_w']:>8.3f} {m['prog_task_j']:>9.2f} "
-            f"{m['cpu_share_pct']:>6.1f}%"
+            f"{m['ei_share_pct']:>6.1f}%"
         )
 
     txt = "\n".join(lines) + "\n"
