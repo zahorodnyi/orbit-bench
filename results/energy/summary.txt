@@ -1,0 +1,5 @@
+phase              samples   time_s    sys_W     sys_J  prog_dW   prog_dJ   task_W    task_J   CPU_%
+idle                    44     5.45    1.152      6.27    0.000      0.00    0.000      0.00    0.0%
+baseline_debug         719    80.59    8.383    675.58    7.231    582.75    3.650    294.11   52.7%
+baseline_release        70     7.86    9.875     77.63    8.723     68.58    3.996     31.41   48.7%
+optimized_release       21     2.36    9.140     21.59    7.988     18.87    3.375      7.97   47.0%

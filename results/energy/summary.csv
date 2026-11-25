@@ -1,0 +1,5 @@
+phase,samples,duration_s,sys_avg_W,sys_energy_J,prog_delta_W,prog_delta_J,prog_task_W,prog_task_J,cpu_share_pct
+idle,44,5.445,1.152,6.272,0.000,0.000,0.000,0.000,0.0
+baseline_debug,719,80.586,8.383,675.579,7.231,582.751,3.650,294.110,52.7
+baseline_release,70,7.862,9.875,77.633,8.723,68.576,3.996,31.414,48.7
+optimized_release,21,2.363,9.140,21.595,7.988,18.873,3.375,7.974,47.0
